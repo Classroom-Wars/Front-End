@@ -2,8 +2,7 @@ require 'rails_helper'
 
 describe Student do
   before :each do
-    @student_info = {:data=>
-                      {:id=>"1",
+    @student_info = {:id=>"1",
                       :type=>"student",
                       :attributes=>
                         {:first_name=>"Boom",
@@ -14,7 +13,6 @@ describe Student do
                         :token=>"ya29.A0AfH6SMBTJgWLj4lYkXMoFz",
                         :refresh_token=>nil},
                       :relationships=>{:courses=>{:data=>[]}}
-                      }
                     }
 
     @student = Student.new(@student_info)

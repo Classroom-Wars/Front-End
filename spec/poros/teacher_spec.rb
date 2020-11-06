@@ -21,7 +21,7 @@ describe Teacher do
   end
   it "exists with attributes" do
     expect(@teacher).to be_a(Teacher)
-    expect(@teacher.id).to eq("2")
+    expect(@teacher.id).to eq(2)
     expect(@teacher.provider).to eq("google_oauth2")
     expect(@teacher.uid).to eq("1057629160")
     expect(@teacher.email).to eq("boom@email.com")

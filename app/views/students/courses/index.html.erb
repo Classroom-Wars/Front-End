@@ -5,7 +5,7 @@
     </div>
 <div class="container">
       <div class="row">
-        <div class="col-md-4" id="my-courses">
+        <div class="col" id="my-courses">
           <h2 >My Classes</h2>
           <% @courses.each do |course| %>
             <section id="course-<%= course.id %>">
@@ -21,11 +21,11 @@
           </section>
         </div>
 
-        <div class="col-md-4" id='my-points'>
+        <div class="col" id='my-points'>
           <h2>My Total Points</h2>
           <h4><%= @points %></h4>
        </div>
-        <div class="col-md-4">
+        <div class="col">
           <h2>My Poms</h2>
           <ol>
           <% @poms.each do |pom| %>

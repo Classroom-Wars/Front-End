@@ -77,4 +77,12 @@ class TeachersService
     end
     JSON.parse(response.body, symbolize_names: true)[:data]
   end
+
+  def self.get_students_by_course(id)
+    course_params = {course_id: id}
+    response = conn("/api/v1/teachers/courses/students").get do |request|
+      request.body = course_params
+    end
+    JSON.parse(response.body, symbolize_names: true)[:data]
+  end
 end

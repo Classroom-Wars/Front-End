@@ -11,7 +11,7 @@ class Teacher
               :role
 
   def initialize(teacher_info)
-    @id = teacher_info[:data][:id]
+    @id = teacher_info[:data][:id].to_i
     @provider = teacher_info[:data][:attributes][:provider]
     @uid = teacher_info[:data][:attributes][:uid]
     @email = teacher_info[:data][:attributes][:email]

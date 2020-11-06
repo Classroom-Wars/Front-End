@@ -9,15 +9,18 @@
             <h2 ><u>My Courses</u></h2>
             <% @courses.each do |course| %>
               <section id='course-<%=course.id%>'>
-                  <h5>Course Name: <%= link_to "#{course.name}", "/teachers/courses/#{course.id}" %></h5><br>
-                  <h5>School Name: <%= course.school_name %></h5>
+                  <h5>Course Name: <br>
+                  <%= link_to "#{course.name}", "/teachers/courses/#{course.id}" %></h5>
+                  <h5>School Name: <br>
+                  <%= course.school_name %></h5>
                   <%= link_to 'Remove this Course', "/teachers/courses/#{course.id}", method: :delete, data: { confirm: "Are you sure?" } %><br>
                   <%= link_to 'Update this Course', "/teachers/courses/#{course.id}/edit" %><br><br>
-                  <h4>Create a War for this Course</h4>
+                  <h6><b><u>Create a War for this Course</u></b></h6>
                   <%= form_with url: "/teachers/courses/#{course.id}/wars", method: :post do |f| %>
                     <p>Opponents Course Code: <%= f.text_field :opponent_course_code, :placeholder => "Your Opponents Course Code" %></p>
                     <%= f.submit 'Create War' %><br>
                   <% end %>
+                  <p>---------------</p>
               </section>
               <br>
             <% end %>
@@ -26,9 +29,9 @@
           <div class="col" id='add-courses'>
             <h2 ><u>Add a new Course</u></h2>
               <%= form_with url: '/teachers/courses', method: :post do |f| %>
-                <p>Course Name: </p><%= f.text_field :name %>
+                <p>Course Name: </p><%= f.text_field :name, :placeholder => "Course Name" %>
                 <br><br>
-                <p>School Name: </p><%= f.text_field :school_name %>
+                <p>School Name: </p><%= f.text_field :school_name, :placeholder => "School Name" %>
                 <%= f.submit 'Add Course' %>
               <% end %>
           </div>
@@ -37,12 +40,13 @@
             <h2><u>My Wars</u></h2>
             <% @wars.each do |war| %>
             <section id='war-<%= war.id %>'>
-              <h5>War vs. <%= war.opponent_course_name %>
-                <%= link_to  "War against course: #{war.opponent_course_id}", "/teachers/courses/wars/#{war.id}" %>
-                <p>My Class Points: <%= war.challenger_course_points %> || VS || Opponent Class Points:  <%= war.opponent_course_points %></p>
+              <h5><%= link_to  "War Opponent: #{war.opponent_course_name}", "/teachers/courses/wars/#{war.id}" %></h5>
+                <p>My Class Points: <%= war.challenger_course_points %></p>
+                <p><b>VS</b><p>
+                <p>Opponent Class Points:  <%= war.opponent_course_points %></p>
                 <%= link_to 'Delete this War', "/teachers/courses/wars/#{war.id}", method: :delete, data: { confirm: "Are you sure?" } %>
             </section>
-            <br>
+            <p>---------------</p>
             <%end%>
          </div>
 
@@ -58,13 +62,15 @@
          </div>
 
 
-          <div class="col">
+          <div class="col" id='my-prizes'>
             <h2><u>My Prizes</u></h2>
             <% @prizes.each do |prize| %>
             <section id='prize-<%=prize.id%>'>
-              <h5>Prize: <%= link_to "#{prize.name}", "/teachers/courses/prizes/#{prize.id}" %></h5><br>
+              <h5>Prize: <%= link_to "#{prize.name}", "/teachers/courses/prizes/#{prize.id}" %></h5>
               <h7>Points needed to Redeem: <%= prize.prize_points %></h7><br>
+              <br>
             </section>
+            <p>---------------</p>
             <% end %>
          </div>
       <hr>

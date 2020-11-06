@@ -15,9 +15,16 @@ class Teachers::CoursesController < ApplicationController
   end
 
   def show
+    @teacher = current_user
     response = Faraday.get("http://localhost:3000/api/v1/teachers/courses/#{params[:id]}")
     course_data = JSON.parse(response.body, symbolize_names: true)[:data]
     @course = Course.new(course_data)
+    @my_students = TeachersFacade.students_in_course(@course.id)
+    # @wars = TeachersFacade.get_course_wars(@course.id)
+    # @prizes = TeachersFacade.get_course_prizes(@course.id)
+    # binding.pry
+    @pom = session[:pom]
+    @answer = session[:answer]
   end
 
   def edit

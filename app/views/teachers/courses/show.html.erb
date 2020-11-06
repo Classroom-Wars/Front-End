@@ -1,3 +1,64 @@
-<h1> <%= @course.name %> </h1>
+<div class="jumbotron">
+    <div class="container">
+        <h1> <%= @course.name %> </h1>
+        <h5>Welcome <%= @teacher.first_name %></h5>
+    </div>
+</div>
 
-<%= button_to 'Edit Course', "/teachers/courses/#{@course.id}/edit", method: :get %>
+<div class="container">
+  <h3><u>Course Info</u></h3>
+  <%= button_to 'Edit Course', "/teachers/courses/#{@course.id}/edit", method: :get %>
+  <br>
+  <br>
+  <div class="row">
+    <div class="col">
+      <h5><u>Poms</u></h5>
+      <br>
+      <%= button_to 'Generate POM', '/pom/single_trivia_question', method: :get %>
+      <% if session[:pom] %>
+        <h3>Question: <%= @pom.html_safe %></h3>
+        <h4>Answer: <%= @answer.html_safe %></h4>
+      <% end %>
+      <br>
+    </div>
+    <div class="col">
+      <h5><u>Course Prizes</u></h5>
+        <p><b>Homework Pass</b> (10 points)</p>
+        <p><b>Choose Song for Pom</b> (20 points)</p>
+        <p><b>Redo an Assignment</b> (30 points)</p>
+      <br>
+    </div>
+    <div class="col">
+      <h5><u>Course Points</u></h5>
+      <p>Total Points by Class: 150</p>
+      <br>
+    </div>
+    <div class="col">
+      <h5><u>Course Wars</u></h5>
+      <p>War Opponent: Algebra 1 Period 3</p>
+      <p>My Class Points: 345</p>
+      <p>VS</p>
+      <p>Opponent Class Points: 287</p> 
+      <br>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <br>
+  <h3><u>My Students</u></h3>
+  <br>
+    <div class="row">
+        <% @my_students.each do |student| %>
+        <div class="col-md-4" id="student-<%= student.id %>">
+          <h5><%= student.first_name + ' ' + student.last_name %></h5>
+          <h6>Students Points: 25</h6>
+          <br>
+          <p>On Time: <%= link_to "5 Points" %></p>
+          <p>Raised Hand to Speak: <%= link_to "10 Points" %></p>
+          <p>Engaged for 90% of Class: <%= link_to "20 Points" %></p>
+          <br>
+        </div>
+        <% end %>
+    </div>
+</div>

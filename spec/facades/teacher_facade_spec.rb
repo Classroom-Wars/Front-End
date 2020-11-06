@@ -8,7 +8,7 @@ describe TeacherFacade do
     teacher = TeacherFacade.find(uid)
 
     expect(teacher).to be_a(Teacher)
-    expect(teacher.id).to be_a(String)
+    expect(teacher.id).to be_an(Integer)
     expect(teacher.provider).to be_a(String)
     expect(teacher.uid).to be_a(String)
     expect(teacher.email).to be_a(String)

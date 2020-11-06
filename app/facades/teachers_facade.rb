@@ -79,4 +79,11 @@ class TeachersFacade
       Prize.new(prize_data)
     end
   end
+
+  def self.students_in_course(id)
+    json = TeachersService.get_students_by_course(id)
+    @students = json.map do |student_data|
+      Student.new(student_data)
+    end
+  end
 end

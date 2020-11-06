@@ -177,4 +177,38 @@ RSpec.describe 'Teachers course CRUD' do
     expect(page).to have_content(course_name)
     expect(page).to_not have_content(course2_name)
   end
+
+  scenario 'a teacher can see their students on a course show page' do
+    stub_teacher_omniauth
+    visit root_path
+    choose(option: 'teachers')
+    click_on "Sign in with Google"
+    expect(current_path).to eq(teachers_courses_path)
+
+    teacher = TeacherFacade.find(stub_teacher_omniauth[:uid])
+    teacher_params = ({teacher_id: teacher.id})
+    response = Faraday.get('http://localhost:3000/api/v1/teachers/courses') do |request|
+      request.body = teacher_params
+    end
+
+    my_courses = JSON.parse(response.body, symbolize_names: true)[:data]
+    course1_id = my_courses[0][:id].to_i
+    course1_name = my_courses[0][:attributes][:name]
+    course_params = ({course_id: course1_id})
+    response = Faraday.get('http://localhost:3000/api/v1/teachers/courses/students') do |request|
+      request.body = course_params
+    end
+    my_students = JSON.parse(response.body, symbolize_names: true)[:data]
+    within '#my-courses' do
+      within "#course-#{course1_id}" do
+        click_on "#{course1_name}"
+      end
+    end
+    my_students.each do |student|
+      within "#student-#{student[:id].to_i}" do
+        expect(page).to have_content(student[:attributes][:first_name])
+        expect(page).to have_content(student[:attributes][:last_name])
+      end
+    end
+  end
 end

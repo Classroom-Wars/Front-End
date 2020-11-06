@@ -7,7 +7,7 @@ class Prize
   def initialize(attrs)
     @id = attrs[:id].to_i
     @name = attrs[:attributes][:name]
-    @prize_points = attrs[:attributes][:prize_points]
-    @course_id = attrs[:relationships][:course][:data][:id]
+    @prize_points = attrs[:attributes][:prize_points].to_i
+    @course_id = attrs[:relationships][:course][:data][:id].to_i
   end
 end
